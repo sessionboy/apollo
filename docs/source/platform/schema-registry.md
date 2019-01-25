@@ -122,10 +122,6 @@ jobs:
       # commands against it
       - run: sleep 5
 
-      # This will authenticate using the `ENGINE_API_KEY` environment
-      # variable. If the GraphQL server is available elsewhere than
-      # http://localhost:4000/graphql, set it with `--endpoint=<URL>`.
-
       # When running on the 'master' branch, publish the latest version
       # of the schema to Apollo Engine.
       - run: |
