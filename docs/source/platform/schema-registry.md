@@ -18,7 +18,7 @@ The Apollo schema registry provides a number of benefits to help teams collabora
 
 <h2 id="setup">Publishing a schema</h2>
 
-Publishing schemas to the Apollo schema registry occurs when pushing a GraphQL service to Engine. A service contains information about the schema and how to run it. Part of this push includes registering the service's schema. To begin using the schema registry and perform a service push, use the [`apollo` command line interface (CLI)](https://npm.im/apollo).
+Publishing schemas to the Apollo schema registry occurs when pushing a [GraphQL service](../resources/graphql-glossary.html#graphql-service) to Engine. A service contains information about the schema and how to run it. Part of this push includes registering the service's schema. To begin using the schema registry and perform a service push, use the [`apollo` command line interface (CLI)](https://npm.im/apollo).
 
 <h3 id="install-apollo-cli">Install Apollo CLI</h3>
 
