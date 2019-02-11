@@ -5,7 +5,7 @@ description: How to maintain the schema's contract with CI
 
 To recognize the need for schema validation, first understand that a GraphQL schema defines a contract between clients and server that contains the available types and their behavior. When a GraphQL API is deployed, consumers start to request fields and depend on the contract. If the schema is updated, such as adding a field or removing a type, the contract changes. Modifying the schema and contract can have a wide range of impact on clients from positive, more functionality, to adverse, active schema dependencies no longer exist.
 
-The Apollo Platform ensures teams deploy schemas without breaking consumers. To prevent dangerous schema evolution, the `apollo service:check` command compares a proposed schema against the active schema to create a list of changes. This resulting list is matched against the field-level usage data from the previous schema and categorizes the changes by severity. If any change's severity is too high, the team is promptly flagged by the cli or GitHub status with actionable feedback.
+The Apollo Platform ensures teams deploy schemas without breaking consumers. To prevent dangerous schema evolution, the `apollo service:check` command compares a proposed schema against the active schema to create a list of changes. This resulting list is matched against the field-level usage data from the previous schema and categorizes the changes by severity. If any change's severity is too high, the team is promptly flagged by the CLI or GitHub status with actionable feedback.
 
 <h2 id="cli">Setup `apollo` for schema changes</h2>
 
@@ -23,7 +23,7 @@ The command can be placed in any continuous integration pipeline, such as this [
 
 <h3 id="check-tags">Multiple schemas</h3>
 
-When multiple schemas are [published under separate tags](./schema-registry.html), the `--tag` flag specifies which schema to compare against, such as `prod` or `staging`. Often running checks against different schema tags during continuous integration ensures that all important deployments are accounted for. Checking multiple tags will result in check statuses similar to:
+When multiple schemas are [pushed under separate tags](./schema-registry.html), the `--tag` flag specifies which schema to compare against, such as `prod` or `staging`. Often running checks against different schema tags during continuous integration ensures that all important deployments are accounted for. Checking multiple tags will result in check statuses similar to:
 
 <div style="text-align:center">
 ![multiple service checks](../img/schema-validation/service-checks.png)
@@ -35,13 +35,13 @@ When multiple schemas are [published under separate tags](./schema-registry.html
 
 <h3 id="severity">Change severity</h3>
 
-The Apollo Platform identifies three change severities and reports them on the command line or within a pull-request status([setup for GitHub](#github)):
+The Apollo Platform identifies three change severities and reports them on the command line or within a pull request status([setup for GitHub](#github)):
 
 1. **Failure**: Either the schema is invalid or the changes _will_ break current clients.
 2. **Warning**: There are potential problems that may come from this change, but no clients are immediately impacted.
 3. **Notice**: This change is safe and will not break current clients.
 
-The overall status of validation, which modifies the cli's exit code and GitHub status, depends on whether metrics are reported to the service.
+The overall status of validation, which modifies the CLI's exit code and GitHub status, depends on whether metrics are reported to the service.
 
 <h3 id="change-types">Change types</h3>
 
@@ -51,7 +51,7 @@ The Apollo Platform identifies three types of changes:
 - **Update**: in-place modification of field or type that could change query results, such as kind change or required argument addition
 - **Removal**: removal of schema element that consumer use, such as type, field, enum, argument, or other
 
-Each of these overall types contains different changes codes, such as `TYPE_REMOVED`, `ARG_DEFAULT_VALUE_CHANGE`, `ENUM_VALUE_ADDED`, or `FIELD_CHANGED_KIND`, which are displayed in the cli output.
+Each of these overall types contains different changes codes, such as `TYPE_REMOVED`, `ARG_DEFAULT_VALUE_CHANGE`, `ENUM_VALUE_ADDED`, or `FIELD_CHANGED_KIND`, which are displayed in the CLI output.
 
 <h3 id="metrics">Assigning severity</h3>
 
@@ -136,7 +136,7 @@ Over time, usage will fall for the deprecated field and grow for the new field.
 
 Versioning is a technique to prevent necessary changes from becoming breaking changes. Developers who have worked with REST APIs past may have various patterns for versioning the API, commonly by using a different URI (e.g. `/api/v1`, `/api/v2`, etc.) or a query parameter (e.g. `?version=1`). With this technique, an application can easily end up with many different API endpoints over time, and the question of _when_ an API can be deprecated can become problematic. While version a GraphQL API the same way may be tempting, multiple graphql endpoints add exponential complexity to schema development and quickly becomes unmaintainable.
 
-<h3 id="what-about-versioning">How about never make a breaking change?</h3>
+<h3 id="never-breaking">How about never make a breaking change?</h3>
 
 To another extreme, teams could choose to avoid making any change that might break an operation, ignoring consumer usage. While a viable strategy for maintaining clients in the short term, this limits the flexibility of the schema. Checking changes against usage enables more improvements to API ergonomics, such as removing fields or default argument updates. Positive API experience leads to better developer experience and more robust client and server interaction.
 
@@ -152,11 +152,11 @@ Go to [https://github.com/apps/apollo-engine](https://github.com/apps/apollo-eng
 
 <h3 id="check-schema-on-ci">Run validation on each commit</h3>
 
-After adding `apollo service:check` in a continuous integration workflow (e.g. CircleCI, etc.), schema validation is performed automatically and potential problems are displayed directly on a pull-request's status checks, providing actionable feedback to developers.
+After adding `apollo service:check` in a continuous integration workflow (e.g. CircleCI, etc.), schema validation is performed automatically and potential problems are displayed directly on a pull request's status checks, providing actionable feedback to developers.
 
 To setup validation, run the `apollo service:check` command targeting a GraphQL server with introspection enabled. An example of is shown below with a CircleCI config:
 
-> Note: with a GitHub status check, ignoring the `apollo`'s error code by appending `|| echo 'validation failed'` allows continuous integration to continue without failing early
+> Note: with a GitHub status check, to allow continuous integration to complete without failing early, ignore the exit code of the `apollo service:check` command. The exit code can be ignored by appending `|| echo 'validation failed'` to the command call.
 
 ```yaml
 version: 2
