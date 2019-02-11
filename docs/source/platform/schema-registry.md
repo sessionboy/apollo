@@ -36,7 +36,7 @@ Once the `apollo` command is installed, the `apollo service:push` command is use
 
 To push a service, start the GraphQL server and run the following command, substituting the appropriate GraphQL endpoint URL and API key:
 
-> An API key can be obtained from a service's _Settings_ menu within the [Apollo UI](https://engine.apollographql.com/).
+> An API key can be obtained from a service's _Settings_ menu within [Engine](https://engine.apollographql.com/).
 
 ```bash
 apollo service:push --key="<API_KEY>" --endpoint="https://example.com/graphql"
@@ -46,7 +46,7 @@ apollo service:push --key="<API_KEY>" --endpoint="https://example.com/graphql"
 
 <h3 id="viewing-schema">Viewing a published schema</h3>
 
-Now that the service is pushed, view it on the [Apollo UI](https://engine.apollographql.com) by browsing to the service's dashboard. The pushed service should now appear with an overall schema summary about its types and fields, as well as full information about every type, argument, and description in the schema. With a published schema, teams can now use productivity boosters such as the [Apollo VS Code extension](./editor-plugins.html)
+Now that the service is pushed, view it on [Engine](https://engine.apollographql.com) by browsing to the service's dashboard. The pushed service should now appear with an overall schema summary about its types and fields, as well as full information about every type, argument, and description in the schema. With a published schema, teams can now use productivity boosters such as the [Apollo VS Code extension](./editor-plugins.html)
 
 <h2 id="schema-tags">Coordinating with schema tags</h2>
 
@@ -80,7 +80,7 @@ const server = new ApolloServer({
 });
 ```
 
-Both the new version of the schema, as well as its performance and error metrics can be viewed in the [Apollo UI](https://engine.apollographql.com) and used with [schema validation](./schema-validation.html).
+Both the new version of the schema, as well as its performance and error metrics can be viewed in [Engine](https://engine.apollographql.com) and used with [schema validation](./schema-validation.html).
 
 <h2 id="history">Schema history</h2>
 

@@ -11,7 +11,7 @@ The Apollo Platform ensures teams deploy schemas without breaking consumers. To 
 
 To check and validate the difference between the current published schema and a new version, run the `apollo service:check` command during continuous integration.
 
-For basic usage, use the following command, substituting the appropriate GraphQL endpoint URL and an API key obtained from the service _Settings_ menu in the [Apollo UI](https://engine.apollographql.com/):
+For basic usage, use the following command, substituting the appropriate GraphQL endpoint URL and an API key obtained from the service _Settings_ menu in [Engine](https://engine.apollographql.com/):
 
 ```bash
 npx apollo service:check --key="<API_KEY>" --endpoint="http://localhost:4000/graphql"
