@@ -1,11 +1,11 @@
 ---
 title: Registering your schema
-description: How to publish your schema to the Apollo registry
+description: How to add your schema to the Apollo registry
 ---
 
 The [schema](https://www.apollographql.com/docs/tutorial/schema.html) is the center point of all GraphQL applications. Concretely, a schema creates an enforceable contract between clients and servers, provides up to date API documentation, and enables development tools to improve. Since the schema is the focal point for developers working with GraphQL, the Apollo GraphQL Platform provides a free schema registry for teams of all sizes to use. The schema registry stores a consistent view of the current and future data models that teams use in every facet of their workflow.
 
-<h2 id="benefits">Benefits of publishing a schema</h2>
+<h2 id="benefits">Benefits of registering schemas</h2>
 
 The Apollo schema registry provides a number of benefits to help teams collaborate and ship high quality software faster. A few of these benefits are:
 
@@ -16,9 +16,9 @@ The Apollo schema registry provides a number of benefits to help teams collabora
 - Protecting the server when combined with the [Apollo operation registry](./operation-registry.html)
 - Keeping the history of schema changes with the [Apollo schema history tab](#history)
 
-<h2 id="setup">Publishing a schema</h2>
+<h2 id="setup">Using the schema registry</h2>
 
-Publishing schemas to the Apollo schema registry occurs when pushing a [GraphQL service](../resources/graphql-glossary.html#graphql-service) to Engine. A service contains information about the schema and how to run it. Part of this push includes registering the service's schema. To begin using the schema registry and perform a service push, use the [`apollo` command line interface (CLI)](https://npm.im/apollo).
+Adding schemas to the Apollo schema registry occurs when pushing a [GraphQL service](../resources/graphql-glossary.html#graphql-service) to Engine. A service contains information about the schema and how to run it. Part of this push includes registering the service's schema. To begin using the schema registry and perform a service push, use the [`apollo` command line interface (CLI)](https://npm.im/apollo).
 
 <h3 id="install-apollo-cli">Install Apollo CLI</h3>
 
@@ -30,9 +30,9 @@ npm install --global apollo
 
 > Note: This guide will utilize the global installation method, but the `apollo` command can also be installed in a project's `devDependencies` and used via [`npm-scripts`](https://docs.npmjs.com/misc/scripts) or [`npx`](https://npm.im/npx).
 
-<h3 id="publish">Pushing a service</h3>
+<h3 id="push">Pushing a service</h3>
 
-Once the `apollo` command is installed, the `apollo service:push` command is used to publish a schema to Apollo Engine.
+Once the `apollo` command is installed, the `apollo service:push` command is used to register a schema to Apollo Engine.
 
 To push a service, start the GraphQL server and run the following command, substituting the appropriate GraphQL endpoint URL and API key:
 
@@ -44,9 +44,9 @@ apollo service:push --key="<API_KEY>" --endpoint="https://example.com/graphql"
 
 > For accuracy, it's best to retrieve the schema from a running GraphQL server (with introspection enabled), though local files representing a schema can also be used. See the [configuration options](./platform/apollo-config.html) for more information.
 
-<h3 id="viewing-schema">Viewing a published schema</h3>
+<h3 id="viewing-schema">Viewing a registered schema</h3>
 
-Now that the service is pushed, view it on [Engine](https://engine.apollographql.com) by browsing to the service's dashboard. The pushed service should now appear with an overall schema summary about its types and fields, as well as full information about every type, argument, and description in the schema. With a published schema, teams can now use productivity boosters such as the [Apollo VS Code extension](./editor-plugins.html)
+Now that the service is pushed, view it on [Engine](https://engine.apollographql.com) by browsing to the service's dashboard. The pushed service should now appear with an overall schema summary about its types and fields, as well as full information about every type, argument, and description in the schema. With a registered schema, teams can now use productivity boosters such as the [Apollo VS Code extension](./editor-plugins.html)
 
 <h2 id="schema-tags">Coordinating with schema tags</h2>
 
@@ -54,9 +54,9 @@ Product cycles move incredibly fast and coordination of teams is critical to shi
 
 There are two parts of setup to getting the most out of schema tags. The first is pushing the tagged schema to the registry:
 
-<h3 id="publishing-a-tag">Publishing a tag</h3>
+<h3 id="using-tags">Using schema tags</h3>
 
-Publishing a tagged version of a schema is done using the same command as publishing the initial schema. In fact, the `apollo service:push` command publishes a schema under a tag called `current`. To publish a tagged version, run the server with the new schema and then push the service:
+Pushing a tagged version of a schema is done using the same command as registering the initial schema. In fact, the `apollo service:push` command registers a schema under a tag called `current`. To register a tagged version, run the server with the new schema and then push the service:
 
 ```bash
 apollo service:push --key="<API_KEY>" --endpoint="https://example.com/graphql" --tag=beta
@@ -84,13 +84,13 @@ Both the new version of the schema, as well as its performance and error metrics
 
 <h2 id="history">Schema history</h2>
 
-As the schema grows and evolves to meet the needs of the product, keeping and visualizing the history of schema changes becomes increasingly valuable. A consistent historical view allows everyone to understand when new features were introduced, when old fields were removed, and which commit made a change. The Apollo Platform provides the tooling necessary to track this history with the [`apollo service:push`](#publish) command.
+As the schema grows and evolves to meet the needs of the product, keeping and visualizing the history of schema changes becomes increasingly valuable. A consistent historical view allows everyone to understand when new features were introduced, when old fields were removed, and which commit made a change. The Apollo Platform provides the tooling necessary to track this history with the [`apollo service:push`](#push) command.
 
-After a schema is published, it becomes the basis for comparison when validating future schemas to avoid breaking changes. Therefore, a service should be pushed to [Engine](https://engine.apollographql.com) each time a new schema is deployed.
+After a schema is registered, it becomes the basis for comparison when validating future schemas to avoid breaking changes. Therefore, a service should be pushed to [Engine](https://engine.apollographql.com) each time a new schema is deployed.
 
-To ensure the schema is published correctly and provides accurate analysis of breaking changes, add the `apollo service:push` command to the end of all deploy scripts. For example in a workflow with continuous deployment, configure the pipeline to run `apollo service:push` automatically on the `master` branch (or the appropriate mainline branch). An example CircleCI configuration details this below.
+To ensure the schema is registered and provides accurate analysis of breaking changes, add the `apollo service:push` command to the end of all deploy scripts. For example in a workflow with continuous deployment, configure the pipeline to run `apollo service:push` automatically on the `master` branch (or the appropriate mainline branch). An example CircleCI configuration details this below.
 
-> Note: in addition to pushing on deploy, publishing the schema on the `master` branch can provide a granular history of schema changes. This is often useful for teams without continuous delivery
+> Note: in addition to pushing on deploy, registering the schema on the `master` branch can provide a granular history of schema changes. This is often useful for teams without continuous delivery
 
 <h3 id="sample-config">Sample CircleCI config</h3>
 
@@ -122,7 +122,7 @@ jobs:
       # commands against it
       - run: sleep 5
 
-      # When running on the 'master' branch, publish the latest version
+      # When running on the 'master' branch, push the latest version
       # of the schema to Apollo Engine.
       - run: |
           if [ "${CIRCLE_BRANCH}" == "master" ]; then
