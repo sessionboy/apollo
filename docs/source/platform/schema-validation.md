@@ -63,15 +63,15 @@ When metrics are sent to a service, the changes are verified in the following ma
 
 The overall schema validation check will fail if there are any changes marked as a `Failure`.
 
-> Occasionally a service or schema tag does not contain any metrics. In this case, schema validation does cannot verify changes, so removals are automatically set as `Failure`. Additionally warnings will fail Github status checks.
+> Occasionally a service or schema tag does not contain any metrics. In this case, schema validation does not verify changes, so removals are automatically set as `Failure`. Additionally warnings will also fail Github status checks.
 
 <h2 id="performing-changes">Strategies for performing schema changes</h2>
 
-Defining strategies to perform these changes with minimal impact on clients enables maintainable evolving a schema in response to rapidly changing product requirements. The insight necessary for these techniques is adding new fields, arguments, queries, or mutations won't introduce any new breaking changes. These changes can be confidently made without consideration about existing clients or field usage metrics, since GraphQL clients receive exactly what they ask for.
+Strategies for performing schema changes with minimal impact on clients are necessary to maintainably evolving a schema in response to rapidly changing product requirements. The insight enabling for these techniques is adding new fields, arguments, queries, or mutations won't introduce any new breaking changes. These additive changes can be confidently made without consideration about existing clients or field usage metrics, since GraphQL clients receive exactly what they ask for.
 
-_Field rollover_ is a term given to an API change that's an evolution of a field, such as a rename or a change in arguments. Some of these changes can be really small, resulting in many variations and making an API harder to manage.
+While tempting to modify a field in place, we strongly recommend deprecating the old field and creating a new one instead rather than updating a field in place, which could break current clients. This technique is defined as _Field rollover_, an API change that's an evolution of a field, such as a rename or a change in arguments.
 
-We'll go over these two kinds of field rollovers separately and show how to make these changes safely.
+We'll go over these a field rollover and show how to make these changes safely.
 
 <h3 id="renaming-or-removing">Renaming or removing a field</h3>
 
@@ -110,9 +110,9 @@ const resolvers = {
 };
 ```
 
-> To prevent code duplication, the resolver logic can be shared between the two fields:
+> To prevent code duplication, the resolver logic can be shared between the two fields
 
-<h3 id="deprecating">Deprecating a field</h3>
+<h3 id="deprecating">Deprecating the field</h3>
 
 The previous tactic works well to avoid breaking changes, however consumers don't know to switch to the new field name. To solve this problem and signal the switch, the GraphQL specification provides a built-in `@deprecated` schema directive (sometimes called decorators in other languages):
 
@@ -134,7 +134,7 @@ Over time, usage will fall for the deprecated field and grow for the new field.
 
 <h3 id="versioning">What about versioning?</h3>
 
-Versioning is a technique to prevent necessary changes from becoming breaking changes. Developers who have worked with REST APIs past may have various patterns for versioning the API, commonly by using a different URI (e.g. `/api/v1`, `/api/v2`, etc.) or a query parameter (e.g. `?version=1`). With this technique, an application can easily end up with many different API endpoints over time, and the question of _when_ an API can be deprecated can become problematic. While version a GraphQL API the same way may be tempting, multiple graphql endpoints add exponential complexity to schema development and quickly becomes unmaintainable.
+Versioning is a technique to prevent necessary changes from becoming breaking changes. Developers who have worked with REST APIs in the past may have various patterns for versioning the API, commonly by using a different URI (e.g. `/api/v1`, `/api/v2`, etc.) or a query parameter (e.g. `?version=1`). With this technique, an application can easily end up with many different API endpoints over time, and the question of _when_ an API can be deprecated can become problematic. While version a GraphQL API the same way may be tempting, multiple graphql endpoints add exponential complexity to schema development and quickly become unmaintainable.
 
 <h3 id="never-breaking">How about never make a breaking change?</h3>
 
