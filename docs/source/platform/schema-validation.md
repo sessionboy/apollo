@@ -138,7 +138,7 @@ Versioning is a technique to prevent necessary changes from becoming breaking ch
 
 <h3 id="never-breaking">How about never make a breaking change?</h3>
 
-To another extreme, teams could choose to avoid making any change that might break an operation, ignoring consumer usage. While a viable strategy for maintaining clients in the short term, this limits the flexibility of the schema. Checking changes against usage enables more improvements to API ergonomics, such as removing fields or default argument updates. Positive API experience leads to better developer experience and more robust client and server interaction.
+Teams can choose to avoid any schema change that might break an operation, ignoring consumer usage. This viable strategy for maintaining clients, since no change will cause a behavior change. Over the long term, this strategy limits the flexibility and usability of the schema. On the other hand, checking changes against usage enables more aggressive improvements to the API, such as removing fields or default argument updates. This freedom often leads to a more positive API experience, which translates to better developer experience and more robust client and server interaction.
 
 <h2 id="github">Continuous Integration and GitHub</h2>
 
