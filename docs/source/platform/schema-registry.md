@@ -50,7 +50,7 @@ Now that the service is pushed, view it on [Engine](https://engine.apollographql
 
 <h2 id="schema-tags">Coordinating with schema tags</h2>
 
-Product cycles move incredibly fast and coordination of teams is critical to shipping features quickly. To enable communication, the Apollo schema registry allows teams to push proposed or future versions of their schema to the registry. These new versions are used in editors, validation, and documentation as the source of truth for future schemas.
+Product cycles move incredibly fast and coordination of teams is critical to shipping features quickly. To enable communication, the Apollo schema registry allows teams to push proposed or future versions of their schema to the registry under a schema tag. These new versions are used in editors, validation, and documentation as the source of truth for future schemas.
 
 There are two parts of setup to getting the most out of schema tags. The first is pushing the tagged schema to the registry:
 
