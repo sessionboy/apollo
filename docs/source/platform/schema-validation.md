@@ -75,9 +75,9 @@ We'll go over these a field rollover and show how to make these changes safely.
 
 <h3 id="renaming-or-removing">Renaming or removing a field</h3>
 
-When a field is unused, renaming or removing can be performed immediately without affecting clients. Unfortunately, additional considerations should be made if a client uses the field or a GraphQL deployment doesn't have per-field usage metrics.
+When a field is unused, renaming or removing can be performed immediately without affecting clients. Unfortunately, additional considerations should be made if a client uses the field or a GraphQL deployment doesn't have per-field usage metrics, especially with a production schema.
 
-For example, with the following `Query` type is in a base schema:
+For example, let's look at a workflow with the following `Query` type in the base schema:
 
 ```graphql
 type Query {
