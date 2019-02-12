@@ -49,7 +49,7 @@ The Apollo Platform identifies three types of changes:
 
 - **Addition**: additive change that is transparent to clients, such as field addition
 - **Update**: in-place modification of field or type that could change query results, such as kind change or required argument addition
-- **Removal**: removal of schema element that consumer use, such as type, field, enum, argument, or other
+- **Removal**: removal of schema element, such as type, field, enum, or argument
 
 Each of these overall types contains different changes codes, such as `TYPE_REMOVED`, `ARG_DEFAULT_VALUE_CHANGE`, `ENUM_VALUE_ADDED`, or `FIELD_CHANGED_KIND`, which are displayed in the CLI output.
 
