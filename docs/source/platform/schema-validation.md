@@ -1,15 +1,15 @@
 ---
 title: Validating schema changes
-description: How to maintain the schema's contract with CI
+description: How to maintain the schema's contract via CI
 ---
 
-To recognize the need for schema validation, first understand that a GraphQL schema defines a contract between clients and server that contains the available types and their behavior. When a GraphQL API is deployed, consumers start to request fields and depend on the contract. If the schema is updated, such as adding a field or removing a type, the contract changes. Modifying the schema and contract can have a wide range of impact on clients from positive, more functionality, to adverse, active schema dependencies no longer exist.
+A GraphQL schema defines the contract between clients and server that contains the available types and their behavior. When a GraphQL API is deployed, consumers start to request fields and depend on the contract. When the schema is updated, such as adding a field or removing a type, the contract changes. Modifying the schema and contract can have a wide range of impact on clients from positive(more functionality) to adverse(active schema dependencies no longer exist).
 
-The Apollo Platform ensures teams deploy schemas without breaking consumers. To prevent dangerous schema evolution, the `apollo service:check` command compares a proposed schema against the active schema to create a list of changes. This resulting list is matched against the field-level usage data from the previous schema and categorizes the changes by severity. If any change's severity is too high, the team is promptly flagged by the CLI or GitHub status with actionable feedback.
+The Apollo Platform ensures teams deploy schemas without breaking consumers. To prevent dangerous schema evolution, the `apollo service:check` command compares a proposed schema against the active schema to create a list of changes. To enhance this comparison, the Apollo Platform stores the operations run against the active schema. Upon validation, the Apollo Platform tests that all of those operations still work against the new proposed schema version and marks changes by severity according to their impact. If any change causes a failure, the team is promptly flagged by the CLI or GitHub status with actionable feedback.
 
 <h2 id="cli">Setup `apollo` for schema changes</h2>
 
-To check and validate the difference between the current published schema and a new version, run the `apollo service:check` command during continuous integration.
+To check and validate the difference between the current schema and a new version, run the `apollo service:check` command during continuous integration.
 
 For basic usage, use the following command, substituting the appropriate GraphQL endpoint URL and an API key obtained from the service _Settings_ menu in [Engine](https://engine.apollographql.com/):
 
